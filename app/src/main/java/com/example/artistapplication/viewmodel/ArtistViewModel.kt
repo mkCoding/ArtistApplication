@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArtistViewModel @Inject constructor(private val artistRepository:ArtistRepository):ViewModel(){
-    val artistLiveData = MutableLiveData<List<String>>()
+    val artistLiveData = MutableLiveData<ArtistModel>()
     val errorLiveData = MutableLiveData<String>()
 
 
@@ -25,22 +25,24 @@ class ArtistViewModel @Inject constructor(private val artistRepository:ArtistRep
 
     fun fetchArtist(){
         viewModelScope.launch(Dispatchers.IO) {
-            val resultObjects = artistRepository.getAllArtist().results
+            val resultObjects = artistRepository.getAllArtist()
             var artistNames = mutableListOf<String>()
 
-            if(resultObjects!=null){
-                //200
-                for(x in resultObjects){
-                    artistNames.add(x?.artistName.toString())
-                }
+            artistLiveData.postValue(resultObjects)
 
-                artistLiveData.postValue(artistNames)
-            }else{
-                //404
-                Log.i("Data_Artist", "No Artist")
-
-
-            }
+//            if(resultObjects!=null){
+//                //200
+//                for(x in resultObjects){
+//                    artistNames.add(x?.artistName.toString())
+//                }
+//
+//                artistLiveData.postValue(artistNames)
+//            }else{
+//                //404
+//                Log.i("Data_Artist", "No Artist")
+//
+//
+//            }
 
         }
     }

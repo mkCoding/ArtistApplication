@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.fetchArtist()
 
         viewModel.artistLiveData.observe(this){
-            Log.i("Data_Artist", it[0].toString())
-            Log.i("Data_Artist_List", "$it")
+//            Log.i("Data_Artist", it?.get(0)?.artistName.toString())
+//            Log.i("Data_Artist_List", "$it") //list of all artist names
 
 
 //            Toast.makeText(this,it.artistName?.get(0).toString(), Toast.LENGTH_LONG).show()
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         *layout manager
         *adapter
      */
+
 
 
 
